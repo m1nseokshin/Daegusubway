@@ -1,114 +1,235 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
-
-const inter = Inter({ subsets: ['latin'] })
+import Head from 'next/head';
+import Image from 'next/image';
+import Search from '@/public/search.svg';
 
 export default function Home() {
+
+  if (typeof window !== 'undefined') {
+    // 데이터 타입 정의
+    interface Subway {
+      선명: string;
+      역명: string;
+      도로명주소: string;
+    }
+  
+    const dataList: Subway[] = [
+        { 선명: "1호선", 역명: "각산역", 도로명주소: "대구광역시 동구 안심로 지하 363(신서동)" },
+        { 선명: "1호선", 역명: "교대역", 도로명주소: "대구광역시 남구 중앙대로 지하 194(대명동)" },
+        { 선명: "1호선", 역명: "대곡역(정부대구청사)", 도로명주소: "대구광역시 달서구 비슬로 지하 2718" },
+        { 선명: "1호선", 역명: "대구역", 도로명주소: "대구광역시 북구 칠성남로30길 지하 24" },
+        { 선명: "1호선", 역명: "대명역", 도로명주소: "대구광역시 남구 대명로 지하71" },
+        { 선명: "1호선", 역명: "동구청역(큰고개)", 도로명주소: "대구광역시 동구 신암남로 지하169(신암동)" },
+        { 선명: "1호선", 역명: "동대구역", 도로명주소: "대구광역시 동구 동대구로 지하530( 신천동)" },
+        { 선명: "1호선", 역명: "동촌역(동촌유원지)", 도로명주소: "대구광역시 동구 해동로 지하197(검사동)" },
+        { 선명: "1호선", 역명: "명덕역(2.28민주운동기념회관)", 도로명주소: "대구광역시 중구 명덕로 지하185(남산동)" },
+        { 선명: "1호선", 역명: "반야월역", 도로명주소: "대구광역시 동구 안심로 지하261" },
+        { 선명: "1호선", 역명: "반월당역", 도로명주소: "대구광역시 중구 달구벌대로 지하2100(덕산동)" },
+        { 선명: "1호선", 역명: "방촌역", 도로명주소: "대구광역시 동구 동촌로 지하275(방촌동)" },
+        { 선명: "1호선", 역명: "상인역", 도로명주소: "대구광역시 달서구 월배로 지하 223" },
+        { 선명: "1호선", 역명: "서부정류장역(관문시장)", 도로명주소: "대구광역시 남구 월배로 지하501 (대명동)" },
+        { 선명: "1호선", 역명: "설화명곡역", 도로명주소: "대구광역시 달성군 비슬로 지하 2476" },
+        { 선명: "1호선", 역명: "송현역", 도로명주소: "대구광역시 달서구 월배로 지하 412" },
+        { 선명: "1호선", 역명: "신기역", 도로명주소: "대구광역시 동구 안심로 지하159(신기동)" },
+        { 선명: "1호선", 역명: "신천역(경북대입구)", 도로명주소: "대구광역시 동구 동부로 지하 41" },
+        { 선명: "1호선", 역명: "아양교역(대구국제공항입구)", 도로명주소: "대구광역시 동구 아양로 지하245(신암동)" },
+        { 선명: "1호선", 역명: "안심역(혁신도시·첨복단지)", 도로명주소: "대구광역시 동구 안심로 지하 455" },
+        { 선명: "1호선", 역명: "안지랑역", 도로명주소: "대구광역시 남구 대명로 지하 141" },
+        { 선명: "1호선", 역명: "영대병원역", 도로명주소: "대구광역시 남구 대명로 지하 292 영대병원역" },
+        { 선명: "1호선", 역명: "용계역", 도로명주소: "대구광역시 동구 동촌로 지하 383" },
+        { 선명: "1호선", 역명: "월배역", 도로명주소: "대구광역시 달서구 월배로 지하 143" },
+        { 선명: "1호선", 역명: "월촌역", 도로명주소: "대구광역시 달서구 월배로 지하 311" },
+        { 선명: "1호선", 역명: "율하역", 도로명주소: "대구광역시 동구 안심로 지하57" },
+        { 선명: "1호선", 역명: "중앙로역", 도로명주소: "대구광역시 중구 중앙대로 424 중앙로역" },
+        { 선명: "1호선", 역명: "진천역", 도로명주소: "대구광역시 달서구 월배로 지하 76" },
+        { 선명: "1호선", 역명: "칠성시장역", 도로명주소: "대구광역시 북구 칠성남로 지하222 (칠성동)" },
+        { 선명: "1호선", 역명: "해안역", 도로명주소: "대구광역시 동구 동촌로 지하167(방촌동)" },
+        { 선명: "1호선", 역명: "현충로역", 도로명주소: "대구광역시 남구 대명로 지하222 (대명동)" },
+        { 선명: "1호선", 역명: "화원역", 도로명주소: "대구광역시 달성군 화원읍 비슬로 2600" },
+        { 선명: "2호선", 역명: "감삼역", 도로명주소: "대구광역시 달서구 달구벌대로 지하 1665(감삼동)" },
+        { 선명: "2호선", 역명: "강창역", 도로명주소: "대구광역시 달서구 달구벌대로 지하1014" },
+        { 선명: "2호선", 역명: "경대병원역", 도로명주소: "대구광역시 중구 달구벌대로 지하2190 (삼덕동)" },
+        { 선명: "2호선", 역명: "계명대역", 도로명주소: "대구광역시 달서구 달구벌대로 지하1140" },
+        { 선명: "2호선", 역명: "고산역", 도로명주소: "대구광역시 수성구 달구벌대로 3080" },
+        { 선명: "2호선", 역명: "내당역", 도로명주소: "대구광역시 서구 달구벌대로 지하1827" },
+        { 선명: "2호선", 역명: "다사역", 도로명주소: "대구광역시 달성군 다사읍 다사역로 지하30" },
+        { 선명: "2호선", 역명: "담티역(수성대·대륜)", 도로명주소: "대구광역시 수성구 달구벌대로 지하 2672" },
+        { 선명: "2호선", 역명: "대공원역(삼성라이온즈파크)", 도로명주소: "대구광역시 수성구 달구벌대호 지하2950" },
+        { 선명: "2호선", 역명: "대구은행역(대구교육청)", 도로명주소: "대구광역시 수성구 달구벌대로 지하2300" },
+        { 선명: "2호선", 역명: "대실역", 도로명주소: "대구광역시 달성군 다사읍 달구벌대로 지하 888" },
+        { 선명: "2호선", 역명: "두류역", 도로명주소: "대구광역시 달서구 달구벌대로 지하1760" },
+        { 선명: "2호선", 역명: "만촌역", 도로명주소: "대구광역시 수성구 달구벌대로 2584" },
+        { 선명: "2호선", 역명: "문양역", 도로명주소: "대구광역시 달성군 다사읍 문양역길 71" },
+        { 선명: "2호선", 역명: "반고개역", 도로명주소: "대구광역시 달서구 달구벌대로 지하1900" },
+        { 선명: "2호선", 역명: "반월당역", 도로명주소: "대구광역시 중구 달구벌대로 지하2100" },
+        { 선명: "2호선", 역명: "범어역", 도로명주소: "대구광역시 수성구 달구벌대로 지하 2396" },
+        { 선명: "2호선", 역명: "사월역", 도로명주소: "대구광역시 수성구 달구벌대로 지하 3290" },
+        { 선명: "2호선", 역명: "성서산업단지역", 도로명주소: "대구광역시 달서구 달구벌대로 지하 1280" },
+        { 선명: "2호선", 역명: "수성구청역(KBS)", 도로명주소: "대구광역시 수성구 달구벌대로 지하 2500" },
+        { 선명: "2호선", 역명: "신매역", 도로명주소: "대구광역시 수성구 달구벌대로 지하 3180" },
+        { 선명: "2호선", 역명: "연호역", 도로명주소: "대구광역시 수성구 달구벌대로 지하 2870" },
+        { 선명: "2호선", 역명: "영남대역", 도로명주소: "경상북도 경산시 대학로 지하270(대동, 영남대역)" },
+        { 선명: "2호선", 역명: "용산역(서부법원·검찰청입구)", 도로명주소: "대구광역시 달서구 달구벌대로 지하1476" },
+        { 선명: "2호선", 역명: "이곡역", 도로명주소: "대구광역시 달서구 달구벌대로 지하 1357" },
+        { 선명: "2호선", 역명: "임당역", 도로명주소: "경상북도 경산시 대학로 170" },
+        { 선명: "2호선", 역명: "정평역", 도로명주소: "경상북도 경산시 대학로 지하60" },
+        { 선명: "2호선", 역명: "죽전역", 도로명주소: "대구광역시 달서구 달구벌대로 지하 1560" },
+        { 선명: "2호선", 역명: "청라언덕역(신남)", 도로명주소: "대구광역시 중구 달구벌대로 지하 2000" },
+        { 선명: "3호선", 역명: "건들바위역", 도로명주소: "대구광역시 남구 명덕로 260(이천동)" },
+        { 선명: "3호선", 역명: "공단역", 도로명주소: "대구광역시 서구 팔달로 28" },
+        { 선명: "3호선", 역명: "구암역(과학대·보건대입구)", 도로명주소: "대구광역시 북구 팔거천동로 1(구암동)" },
+        { 선명: "3호선", 역명: "남산역(계명네거리)", 도로명주소: "대구광역시 중구 남산로 2(남산동)" },
+        { 선명: "3호선", 역명: "달성공원역", 도로명주소: "대구광역시 중구 달성로 116 (수창동)" },
+        { 선명: "3호선", 역명: "대봉교역", 도로명주소: "대구광역시 남구 명덕로 330(이천동)" },
+        { 선명: "3호선", 역명: "동천역", 도로명주소: "대구광역시 북구 팔거천동로 147(동천동)" },
+        { 선명: "3호선", 역명: "만평역", 도로명주소: "대구광역시 북구 팔달로 105" },
+        { 선명: "3호선", 역명: "매천시장역", 도로명주소: "대구광역시 북구 매천로18길 39" },
+        { 선명: "3호선", 역명: "매천역", 도로명주소: "대구광역시 북구 학정로 6 매천역" },
+        { 선명: "3호선", 역명: "명덕역(2.28민주운동기념회관)", 도로명주소: "대구광역시 남구 명덕로 186(대명동)" },
+        { 선명: "3호선", 역명: "범물역", 도로명주소: "대구광역시 수성구 지범로 194" },
+        { 선명: "3호선", 역명: "북구청역(DGB대구은행파크)", 도로명주소: "대구광역시 서구 원대로 71 (원대동2가)" },
+        { 선명: "3호선", 역명: "서문시장역(동산병원)", 도로명주소: "대구광역시 중구 달성로 50(동산동)" },
+        { 선명: "3호선", 역명: "수성구민운동장역", 도로명주소: "대구광역시 수성구 동대구로 248(범어동)" },
+        { 선명: "3호선", 역명: "수성못역(TBC)", 도로명주소: "대구광역시 수성구 동대구로 14(지산동)" },
+        { 선명: "3호선", 역명: "수성시장역", 도로명주소: "대구광역시 수성구 명덕로 420(수성동2가)" },
+        { 선명: "3호선", 역명: "어린이회관역", 도로명주소: "대구광역시 수성구 동대구로 166" },
+        { 선명: "3호선", 역명: "용지역", 도로명주소: "대구광역시 수성구 범안로 83" },
+        { 선명: "3호선", 역명: "원대역", 도로명주소: "대구광역시 서구 팔달로 224-2 (원대동3가)" },
+        { 선명: "3호선", 역명: "지산역(대구지방법원·우체국)", 도로명주소: "대구광역시 수성구 동대구로 34" },
+        { 선명: "3호선", 역명: "청라언덕역(신남)", 도로명주소: "대구광역시 중구 남산로 80(남산동)" },
+        { 선명: "3호선", 역명: "칠곡경대병원역", 도로명주소: "대구광역시 북구 팔거천동로 386(동호동)" },
+        { 선명: "3호선", 역명: "칠곡운암역", 도로명주소: "대구광역시 북구 팔거천동로 79(구암동)" },
+        { 선명: "3호선", 역명: "태전역", 도로명주소: "대구광역시 북구 칠곡중앙대로 262" },
+        { 선명: "3호선", 역명: "팔거역(국립농관원·통계청)", 도로명주소: "대구광역시 북구 팔거천동로 226(동천동)" },
+        { 선명: "3호선", 역명: "팔달시장역", 도로명주소: "대구광역시 북구 팔달로 163-1 (노원동3가)" },
+        { 선명: "3호선", 역명: "팔달역", 도로명주소: "대구광역시 북구 매천로2길 43" },
+        { 선명: "3호선", 역명: "학정역", 도로명주소: "대구광역시 북구 팔거천동로 310(학정동)" },
+        { 선명: "3호선", 역명: "황금역", 도로명주소: "대구광역시 수성구 동대구로 100" },
+    ];
+
+    const $search: HTMLInputElement | null = document.querySelector("#search");
+    const $autoComplete: HTMLElement | null = document.querySelector(".autocomplete");
+
+    let nowIndex: number = 0;
+
+    if ($search && $autoComplete) {
+      $search.addEventListener("input", (event: Event) => {
+        if (!($search instanceof HTMLInputElement) || !($autoComplete instanceof HTMLElement)) {
+          return;
+        }
+    
+        // 검색어
+        const value: string = $search.value.trim().toLowerCase(); // 소문자로 변환
+    
+        // 자동완성 필터링
+        const matchDataList: Subway[] = value
+          ? dataList.filter((item) =>
+              item.선명.includes(value) || item.역명.includes(value) || item.도로명주소.includes(value)
+            )
+          : [];
+
+        // "검색" 버튼 엘리먼트 선택
+        const $searchButton: HTMLButtonElement | null = document.querySelector(".search-button");
+      
+// "검색" 버튼 클릭 이벤트 핸들러
+if ($searchButton) {
+  $searchButton.addEventListener("click", () => {
+    if (!($search instanceof HTMLInputElement)) {
+      return;
+    }
+    const value: string = $search.value.trim().toLowerCase();
+
+    // 데이터를 필터링하는 함수를 수정하여 전체 역 이름을 검색하도록 변경
+    const matchDataList: Subway[] = value
+      ? dataList.filter((item) =>
+          item.역명.includes(value) || item.도로명주소.includes(value)
+        )
+      : [];
+
+    const selectedStation = matchDataList[nowIndex];
+    if (selectedStation) {
+      const value: string = $search.value.trim().toLowerCase();
+      const googleSearchURL = `https://www.google.com/maps/search/${encodeURIComponent(selectedStation.역명)}?entry=ttu`;
+      window.location.href = googleSearchURL;
+    }
+  });
+}
+
+    
+        switch ((event as KeyboardEvent).key) {
+          // UP KEY
+          case "ArrowUp":
+            nowIndex = Math.max(nowIndex - 1, 0);
+            break;
+    
+          // DOWN KEY
+          case "ArrowDown":
+            nowIndex = Math.min(nowIndex + 1, matchDataList.length - 1);
+            break;
+    
+          // 그 외 다시 초기화
+          default:
+            nowIndex = 0;
+            break;
+        }
+    
+        // 리스트 보여주기
+        showList(matchDataList, value, nowIndex);
+      });
+    
+// 자동완성 리스트 클릭 이벤트 핸들러
+$autoComplete.addEventListener("click", (event) => {
+  if (event.target instanceof HTMLElement) {
+    const selectedText = event.target.textContent || "";
+    const stationName = selectedText.split('(')[0].trim(); // 역명만 추출
+    $search.value = stationName; // 검색 입력 필드에 역명 설정
+    nowIndex = 0;
+    $autoComplete.innerHTML = ""; // 클릭하면 리스트 초기화
+  }
+});
+    }
+    
+    const showList = (data: Subway[], value: string, nowIndex: number) => {
+      if ($autoComplete) {
+        $autoComplete.innerHTML = data
+          .slice(0, 6)
+          .map(
+            (item, index) => `
+              <div class='${nowIndex === index ? "active" : ""}'>
+${item.역명.trim()}(${item.선명.trim()}) ${item.도로명주소.trim()}</div>`
+          )
+          .join("");
+      }
+    };
+  }
+
+
   return (
     <>
       <Head>
-        <title>Create Next App</title>
+        <title>대구도시철도 검색</title>
         <meta name="description" content="Generated by create next app" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${styles.main} ${inter.className}`}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>pages/index.tsx</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
-          </div>
-        </div>
-
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
+      <section>
+        <div className='title'>대구도시철도 역명 검색</div>
+        <div className='subtitle'>대구광역시의 도시철도</div>
+        <div className='container'>
+          <input
+            type="text"
+            id="search"
+            placeholder="지하철 역명을 검색하세요."
+            autoComplete="off"
           />
+          <Image src={Search} alt='search' className='search-button' />
         </div>
+        <div className="autocomplete"></div>
+      </section>
 
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
+      <div className='footer-text'>
+        본 페이지는 포트폴리오 용도로 제작되었습니다.<br />DB는 공공데이터포털 국가철도공단 대구 지하철 주소데이터를 이용했습니다.<br />
+        Contact: m1nseokdesign@gmail.com ⎥ © 2023 by Minseok Shin.
+      </div>
     </>
-  )
-}
+  );
+} 
