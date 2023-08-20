@@ -71,7 +71,9 @@ section {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
   margin-top: 25vh;
 }
 
@@ -90,4 +92,42 @@ mark {
   color: #555555;
   width: 100%;
   text-align: center;
+}
+
+@media (max-width:1024px) {
+  .title{
+    font-size: 25px;
+    margin-bottom: 10px;
+  }
+  .subtitle{
+    font-size: 12px;
+  }
+  input{
+    width: 70%;
+  }
+  .search-button{
+    right: 15%;
+  }
+  .footer-text{
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    font-size: 10px;
+  }
+
+  .autocomplete > div {
+    margin-top: 10px;
+    background-color: #f1f0f0;
+    border-radius: 5px;
+    padding: 0.4rem;
+    font-size: 11px;
+  }
+  
+  .autocomplete > div.active {
+    margin-top: 20px;
+    background-color: #f1f0f0;
+    border-radius: 5px;
+    padding: 0.4rem;  
+    font-size: 11px;
+  }
 }

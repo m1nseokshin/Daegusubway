@@ -213,7 +213,7 @@ ${item.역명.trim()}(${item.선명.trim()}) ${item.도로명주소.trim()}</div
       </Head>
       <section>
         <div className='title'>대구도시철도 역명 검색</div>
-        <div className='subtitle'>대구광역시의 도시철도</div>
+        <div className='subtitle'>대구광역시의 도시철도를 검색해볼 수 있습니다.</div>
         <div className='container'>
           <input
             type="text"
