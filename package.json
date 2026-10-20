@@ -13,9 +13,12 @@
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
     "@usecsv/react": "^0.3.0",
-    "next": "13.4.19",
+    "next": "^15.5.28",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "5.1.6"
+  },
+  "overrides": {
+    "postcss": "^8.5.31"
   }
 }
